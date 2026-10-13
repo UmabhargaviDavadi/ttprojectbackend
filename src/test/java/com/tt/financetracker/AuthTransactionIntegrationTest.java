@@ -2,6 +2,7 @@ package com.tt.financetracker;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tt.financetracker.security.JwtService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AuthTransactionIntegrationTest {
     @Autowired private MockMvc mockMvc;
     @Autowired private ObjectMapper objectMapper;
+    @Autowired private JwtService jwtService;
 
     @Test
     void registersLogsInAndCreatesAutoCategorizedTransaction() throws Exception {
@@ -46,5 +48,16 @@ class AuthTransactionIntegrationTest {
                 .andExpect(jsonPath("$.category").value("Travel"))
                 .andExpect(jsonPath("$.type").value("expense"))
                 .andExpect(jsonPath("$.amount").value(245.50));
+    }
+
+    @Test
+    void jwtForUnknownUserReturns401InsteadOf500() throws Exception {
+        String token = jwtService.generate("ghost-" + System.nanoTime() + "@example.com");
+
+        mockMvc.perform(post("/transactions")
+                        .header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"amount\":25.00,\"description\":\"Ghost spending\",\"type\":\"expense\",\"date\":\"2026-10-11\"}"))
+                .andExpect(status().isUnauthorized());
     }
 }

@@ -78,8 +78,8 @@ The repository now includes a ready-to-use example file at `TT Backend/.env.exam
 | --- | --- | --- |
 | `SERVER_PORT` | `8080` | HTTP port |
 | `DB_URL` | `jdbc:mysql://localhost:3306/finance_tracker?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC` | JDBC URL |
-| `DB_USERNAME` | `root` | MySQL user |
-| `DB_PASSWORD` | `change-me-local` | Placeholder MySQL password; override locally |
+| `DB_USERNAME` | `finance_app` | MySQL user |
+| `DB_PASSWORD` | `finance_app` | Local MySQL password for the finance_app user |
 | `JWT_SECRET` | Local development key (over 32 bytes) | HMAC signing key; replace with a random secret in deployments |
 | `JWT_EXPIRATION_MS` | `86400000` | Token validity |
 | `SEED_DEMO` | `true` | Seed sample demo user/activity |
