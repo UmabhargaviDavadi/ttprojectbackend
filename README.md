@@ -20,7 +20,27 @@ If startup reports `Access denied for user 'root'@'localhost'`, set `DB_PASSWORD
 
 ## Run
 
-From `TT Backend` in PowerShell:
+### Option 1: Local MySQL via Docker
+
+From the project root:
+
+```powershell
+docker compose up -d mysql
+```
+
+Then start the backend with the real database configuration:
+
+```powershell
+Copy-Item .env.example .env
+$env:DB_URL = "jdbc:mysql://localhost:3306/finance_tracker?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+$env:DB_USERNAME = "finance_app"
+$env:DB_PASSWORD = "finance_app"
+$env:JWT_SECRET = "replace-with-a-long-random-secret-at-least-32-chars"
+.\mvnw.cmd clean install
+.\mvnw.cmd spring-boot:run
+```
+
+### Option 2: Local MySQL installed directly on the machine
 
 ```powershell
 $env:DB_PASSWORD = "your-local-mysql-password"
@@ -51,6 +71,8 @@ H2 is test-scoped, keeping it out of the normal runtime artifact. To run the opt
 This starts the same API on port 8080 using an in-memory H2 database. The database is lost when the process exits. Automated tests use the separate `test` profile and `src/test/resources/application-test.properties`.
 
 ## Environment variables
+
+The repository now includes a ready-to-use example file at `TT Backend/.env.example` and a root `docker-compose.yml` for local MySQL startup.
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
