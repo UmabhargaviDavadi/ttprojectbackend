@@ -51,6 +51,7 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
+            "https://ttprojectfrontend-jade.vercel.app",
                 "https://ttprojectfrontend-n9mv.vercel.app",
                 "http://localhost:5173",
                 "http://127.0.0.1:5173"
