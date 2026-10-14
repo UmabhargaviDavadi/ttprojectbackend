@@ -135,7 +135,7 @@ Validation and service errors use `{ "timestamp": "...", "status": 400, "message
 
 ## CORS and security
 
-CORS allows `http://localhost:5173` and `http://127.0.0.1:5173`, credentials, Authorization/Content-Type headers, and GET/POST/PUT/DELETE/OPTIONS. Sessions are stateless, passwords use BCrypt, CSRF is disabled for the API, and JWTs are validated by the request filter. Every data service scopes access to the authenticated user's ID. Transaction indexes cover `(user_id, date)` and `(user_id, category_id)`.
+CORS allows `http://localhost:5173`, `http://127.0.0.1:5173`, and `https://ttprojectfrontend-n9mv.vercel.app`, credentials, Authorization/Content-Type headers, and GET/POST/PUT/DELETE/OPTIONS. Sessions are stateless, passwords use BCrypt, CSRF is disabled for the API, and JWTs are validated by the request filter. Every data service scopes access to the authenticated user's ID. Transaction indexes cover `(user_id, date)` and `(user_id, category_id)`.
 
 ## Verification
 
