@@ -54,7 +54,8 @@ public class SecurityConfig {
             "https://ttprojectfrontend-jade.vercel.app",
                 "https://ttprojectfrontend-n9mv.vercel.app",
                 "http://localhost:5173",
-                "http://127.0.0.1:5173"
+                "http://127.0.0.1:5173",
+                "http://localhost:5175"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept", "Origin", "X-Requested-With"));
